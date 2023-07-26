@@ -1,0 +1,49 @@
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  todos: [Todo]
+}
+
+type Todo {
+  id: Int!
+  title: String!
+  completed: Boolean!
+  user: User!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input CreateTodoInput {
+  title: String!
+  completed: Boolean!
+  userId: Int!
+}
+
+input UpdateTodoInput {
+  id: Int!
+  title: String
+  completed: Boolean
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+  createTodo(input: CreateTodoInput!): Todo!
+  updateTodo(input: UpdateTodoInput!): Todo!
+  deleteTodo(id: Int!): Todo!
+}
+type OutputTodo {
+  data:[Todo]
+  stateCode:Int
+  error: String
+  total: Int
+}
+type Query {
+  getUser(id: Int!): User!
+  getTodoById(id: Int!): Todo!
+  getTodosByUserId(userId: Int!): [Todo!]!
+}
